@@ -162,6 +162,25 @@ namespace MyBhapticsTactsuit
             HeartBeat_mrse.Reset();
         }
 
+        public void StartPulling(bool isRightArm)
+        {
+            string postfix = "_L";
+            if (isRightArm) postfix = "_R";
+            PlaybackHaptics("PullBallVest" + postfix);
+            PlaybackHaptics("PullBallArms" + postfix);
+            PlaybackHaptics("PullBallHands" + postfix);
+        }
+
+        public void StopPulling()
+        {
+            StopHapticFeedback("PullBallVest_R");
+            StopHapticFeedback("PullBallVest_L");
+            StopHapticFeedback("PullBallArms_R");
+            StopHapticFeedback("PullBallArms_L");
+            StopHapticFeedback("PullBallHands_R");
+            StopHapticFeedback("PullBallHands_L");
+        }
+
         public bool IsPlaying(String effect)
         {
             return bHaptics.IsPlaying(effect);
