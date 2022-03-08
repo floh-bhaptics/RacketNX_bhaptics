@@ -56,6 +56,7 @@ namespace RacketNX_bhaptics
                         break;
                 }
                 tactsuitVr.LOG("Powerup: " + pu.ToString());
+                tactsuitVr.PlaybackHaptics("PowerUpFeet");
                 tactsuitVr.PlaybackHaptics("PowerUp");
             }
         }
@@ -67,6 +68,51 @@ namespace RacketNX_bhaptics
             public static void Postfix()
             {
                 tactsuitVr.Recoil("Blade", rightHanded);
+            }
+        }
+
+        
+        [HarmonyPatch(typeof(Announcer), "gameEndReason", new Type[] { typeof(GameEndReason) })]
+        public class bhaptics_AnnounceGameEnd
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.StopThreads();
+            }
+        }
+        
+
+        [HarmonyPatch(typeof(PowerupNuke), "activate", new Type[] {  })]
+        public class bhaptics_NukeActivated
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.PlaybackHaptics("RumbleFeet");
+                tactsuitVr.PlaybackHaptics("ExplosionBelly");
+            }
+        }
+
+        [HarmonyPatch(typeof(PowerupWreckingBall), "playBreakSound", new Type[] { typeof(Vector3) })]
+        public class bhaptics_WreckingBallBreak
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.PlaybackHaptics("RumbleFeet", 0.7f);
+                tactsuitVr.PlaybackHaptics("ExplosionBelly", 0.7f);
+            }
+        }
+
+        [HarmonyPatch(typeof(PowerupSupersize), "activate", new Type[] {  })]
+        public class bhaptics_SuperSize
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.PlaybackHaptics("PowerUpFeet");
+                tactsuitVr.PlaybackHaptics("SuperSize");
             }
         }
 
@@ -104,8 +150,9 @@ namespace RacketNX_bhaptics
         public class bhaptics_StartSlowMotion
         {
             [HarmonyPostfix]
-            public static void Postfix()
+            public static void Postfix(Player __instance, GameObject sender, float fRequestedSlowMotion, float fRate)
             {
+                if (!sender.name.Contains("Ball")) return;
                 tactsuitVr.StartHeartBeat();
             }
         }
@@ -117,6 +164,26 @@ namespace RacketNX_bhaptics
             public static void Postfix()
             {
                 tactsuitVr.StopHeartBeat();
+            }
+        }
+
+        [HarmonyPatch(typeof(GameEventsManager), "gameEnded", new Type[] { typeof(GameEndReason) })]
+        public class bhaptics_GameEnded
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.StopThreads();
+            }
+        }
+
+        [HarmonyPatch(typeof(GameEventsManager), "roundEnded", new Type[] { typeof(GameEndReason) })]
+        public class bhaptics_RoundEnded
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.StopThreads();
             }
         }
 

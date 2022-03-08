@@ -205,6 +205,7 @@ namespace MyBhapticsTactsuit
             // Yes, looks silly here, but if you have several threads like this, this is
             // very useful when the player dies or starts a new level
             StopHeartBeat();
+            StopPulling();
         }
 
 
