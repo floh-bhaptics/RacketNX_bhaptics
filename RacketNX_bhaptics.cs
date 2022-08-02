@@ -124,7 +124,6 @@ namespace RacketNX_bhaptics
             [HarmonyPostfix]
             public static void Postfix()
             {
-                tactsuitVr.LOG("StartPulling");
                 tactsuitVr.StartPulling(rightHanded);
             }
         }
@@ -135,7 +134,6 @@ namespace RacketNX_bhaptics
             [HarmonyPostfix]
             public static void Postfix()
             {
-                tactsuitVr.LOG("StoppPulling");
                 tactsuitVr.StopPulling();
             }
         }
