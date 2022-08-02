@@ -51,7 +51,9 @@ namespace RacketNX_bhaptics
                     case PowerupType.WreckingBall:
                         break;
                     case PowerupType.Supersize:
-                        break;
+                        tactsuitVr.PlaybackHaptics("PowerUpFeet");
+                        tactsuitVr.PlaybackHaptics("SuperSize");
+                        return;
                     default:
                         break;
                 }
@@ -68,6 +70,7 @@ namespace RacketNX_bhaptics
             public static void Postfix()
             {
                 tactsuitVr.Recoil("Blade", rightHanded);
+                tactsuitVr.StopPulling();
             }
         }
 
@@ -81,10 +84,9 @@ namespace RacketNX_bhaptics
                 tactsuitVr.StopThreads();
             }
         }
-        
 
-        [HarmonyPatch(typeof(PowerupNuke), "activate", new Type[] {  })]
-        public class bhaptics_NukeActivated
+        [HarmonyPatch(typeof(NukeSurface), "explode", new Type[] {  })]
+        public class bhaptics_NukeExplode
         {
             [HarmonyPostfix]
             public static void Postfix()
@@ -94,6 +96,7 @@ namespace RacketNX_bhaptics
             }
         }
 
+
         [HarmonyPatch(typeof(PowerupWreckingBall), "playBreakSound", new Type[] { typeof(Vector3) })]
         public class bhaptics_WreckingBallBreak
         {
@@ -102,17 +105,6 @@ namespace RacketNX_bhaptics
             {
                 tactsuitVr.PlaybackHaptics("RumbleFeet", 0.7f);
                 tactsuitVr.PlaybackHaptics("ExplosionBelly", 0.7f);
-            }
-        }
-
-        [HarmonyPatch(typeof(PowerupSupersize), "activate", new Type[] {  })]
-        public class bhaptics_SuperSize
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.PlaybackHaptics("PowerUpFeet");
-                tactsuitVr.PlaybackHaptics("SuperSize");
             }
         }
 
@@ -132,6 +124,7 @@ namespace RacketNX_bhaptics
             [HarmonyPostfix]
             public static void Postfix()
             {
+                tactsuitVr.LOG("StartPulling");
                 tactsuitVr.StartPulling(rightHanded);
             }
         }
@@ -142,10 +135,11 @@ namespace RacketNX_bhaptics
             [HarmonyPostfix]
             public static void Postfix()
             {
+                tactsuitVr.LOG("StoppPulling");
                 tactsuitVr.StopPulling();
             }
         }
-
+        
         [HarmonyPatch(typeof(Player), "StartSlowMotion", new Type[] { typeof(GameObject), typeof(float), typeof(float) })]
         public class bhaptics_StartSlowMotion
         {

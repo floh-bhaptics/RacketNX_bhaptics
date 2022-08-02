@@ -189,6 +189,7 @@ namespace MyBhapticsTactsuit
         public void StopHapticFeedback(String effect)
         {
             bHaptics.TurnOff(effect);
+            bHaptics.TurnOff();
         }
 
         public void StopAllHapticFeedback()
