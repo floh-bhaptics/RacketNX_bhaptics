@@ -15,8 +15,8 @@ using MelonLoader;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: MelonInfo(typeof(RacketNX_bhaptics.RacketNX_bhaptics), "RacketNX_bhaptics", "1.2.1", "Florian Fahrenberger")]
-[assembly: MelonGame("One Hamsa", "Racket: Nx")]
+[assembly: MelonInfo(typeof(RacketNX_bhaptics.RacketNX_bhaptics), "RacketNX_bhaptics", "1.2.2", "Florian Fahrenberger")]
+[assembly: MelonGame("One Hamsa", "Racket Nx")]
 // Durch Festlegen von ComVisible auf FALSE werden die Typen in dieser Assembly
 // für COM-Komponenten unsichtbar.  Wenn Sie auf einen Typ in dieser Assembly von
 // COM aus zugreifen müssen, sollten Sie das ComVisible-Attribut für diesen Typ auf "True" festlegen.
@@ -35,5 +35,5 @@ using MelonLoader;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.1")]
-[assembly: AssemblyFileVersion("1.2.1")]
+[assembly: AssemblyVersion("1.2.2")]
+[assembly: AssemblyFileVersion("1.2.2")]
