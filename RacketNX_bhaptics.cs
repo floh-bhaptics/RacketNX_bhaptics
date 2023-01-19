@@ -9,6 +9,10 @@ using HarmonyLib;
 using UnityEngine;
 using MyBhapticsTactsuit;
 
+[assembly: MelonInfo(typeof(RacketNX_bhaptics.RacketNX_bhaptics), "RacketNX_bhaptics", "1.2.2", "Florian Fahrenberger")]
+[assembly: MelonGame("One Hamsa", "Racket Nx")]
+
+
 namespace RacketNX_bhaptics
 {
     public class RacketNX_bhaptics : MelonMod
@@ -16,9 +20,8 @@ namespace RacketNX_bhaptics
         public static TactsuitVR tactsuitVr;
         public static bool rightHanded = true;
 
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
-            base.OnApplicationStart();
             tactsuitVr = new TactsuitVR();
             tactsuitVr.PlaybackHaptics("HeartBeat");
         }
